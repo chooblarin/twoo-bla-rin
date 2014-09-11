@@ -4,9 +4,11 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chooblarin.twooblarin.R;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
@@ -19,9 +21,12 @@ public class TweetAdapter extends BindableAdapter<Status> {
 
     private List<Status> mStatusList;
 
+    private ImageLoader mLoader;
+
     public TweetAdapter(Context context, List<Status> items) {
         super(context, items);
         mStatusList = items;
+        mLoader = ImageLoader.getInstance();
     }
 
     @Override
@@ -36,6 +41,11 @@ public class TweetAdapter extends BindableAdapter<Status> {
 
     @Override
     public void bindView(Status item, View view) {
+        // twitter icon
+        mLoader.displayImage(
+                item.getUser().getProfileImageURL(),
+                (ImageView) view.findViewById(R.id.twitter_icon));
+
         ((TextView) view.findViewById(R.id.twitter_id)) // twitter id
                 .setText("@" + item.getUser().getScreenName());
         ((TextView) view.findViewById(R.id.twitter_name)) // user name
