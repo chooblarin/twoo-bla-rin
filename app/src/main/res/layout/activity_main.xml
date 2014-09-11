@@ -11,7 +11,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="onClickStart"
-        android:text="start"/>
+        android:onClick="onClickLetsTwitter"
+        android:text="Let's Twitter"/>
 
 </LinearLayout>
