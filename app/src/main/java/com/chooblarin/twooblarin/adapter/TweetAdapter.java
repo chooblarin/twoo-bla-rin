@@ -19,19 +19,22 @@ import twitter4j.Status;
  */
 public class TweetAdapter extends BindableAdapter<Status> {
 
-    private List<Status> mStatusList;
+    private Context context;
 
-    private ImageLoader mLoader;
+    private List<Status> statuses;
+
+    private ImageLoader imageLoader;
 
     public TweetAdapter(Context context, List<Status> items) {
         super(context, items);
-        mStatusList = items;
-        mLoader = ImageLoader.getInstance();
+        this.context = context;
+        statuses = items;
+        imageLoader = ImageLoader.getInstance();
     }
 
     @Override
     public Status getItem(int position) {
-        return mStatusList.get(position);
+        return statuses.get(position);
     }
 
     @Override
@@ -42,9 +45,11 @@ public class TweetAdapter extends BindableAdapter<Status> {
     @Override
     public void bindView(Status item, View view) {
         // twitter icon
-        mLoader.displayImage(
-                item.getUser().getProfileImageURL(),
-                (ImageView) view.findViewById(R.id.twitter_icon));
+        ImageView icon = (ImageView) view.findViewById(R.id.twitter_icon);
+        icon.setImageDrawable(context.getResources().getDrawable(R.drawable.non_image));
+
+        imageLoader.displayImage(
+                item.getUser().getProfileImageURL(), icon);
 
         ((TextView) view.findViewById(R.id.twitter_id)) // twitter id
                 .setText("@" + item.getUser().getScreenName());
