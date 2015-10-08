@@ -37,3 +37,4 @@ com_crashlytics_export_strings.xml
 crashlytics-build.properties
 
 twitter_config.xml
+fabric.properties
